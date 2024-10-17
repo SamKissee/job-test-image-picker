@@ -1,16 +1,23 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Home from './src/Screens/Home';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 // basic render screen cleaning up App File.
 // nav, analytics, and other utilities go here.
 
 function App() {
   return (
-    <SafeAreaView>
+    <GestureHandlerRootView style={styles.gesture}>
       <Home />
-    </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
+
+const styles = StyleSheet.create({
+  gesture: {
+    flex: 1,
+  },
+});
 
 export default App;
