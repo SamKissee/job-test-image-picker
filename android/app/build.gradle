@@ -53,10 +53,6 @@ react {
     /* Autolinking */
     autolinkLibrariesWithApp()
     //
-    // Added by install-expo-modules
-    entryFile = file(["node", "-e", "require('expo/scripts/resolveAppEntry')", rootDir.getAbsoluteFile().getParentFile().getAbsolutePath(), "android", "absolute"].execute(null, rootDir).text.trim())
-    cliFile = new File(["node", "--print", "require.resolve('@expo/cli')"].execute(null, rootDir).text.trim())
-    bundleCommand = "export:embed"
 }
 
 /**
@@ -83,6 +79,16 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace "com.imagepickerproject"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.majorVersion
+    }
+
     defaultConfig {
         applicationId "com.imagepickerproject"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -115,7 +121,7 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-
+    implementation 'androidx.activity:activity-ktx:1.9.3'
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
